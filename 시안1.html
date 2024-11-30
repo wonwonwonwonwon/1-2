@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Main Screen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #00204b;
+      overflow: hidden;
+      font-family: 'Playfair Display', serif; 
+    }
+
+    #background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/1OpiwKZ.jpeg') no-repeat center center/cover;
+      animation: fadeInBackground 15s infinite;
+    }
+
+    @keyframes fadeInBackground {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .floating {
+      position: absolute;
+      width: 200px;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    #item1 {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    #item2 {
+      top: 50%;
+      left: 20%;
+      animation-delay: 1s;
+    }
+
+    #item3 {
+      top: 30%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    #item4 {
+      bottom: 10%;
+      left: 40%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .text {
+      position: absolute;
+      width: 100%;
+      top: 35%;
+      text-align: center;
+      font-size: 70px;
+      font-weight: 700; 
+      color: #fffdbb;
+      animation: fadeInText 5s infinite;
+      font-family: 'Playfair Display', serif; 
+    }
+
+    .tip {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      text-align: center;
+      font-size: 17px;
+      color: #fff;
+      font-family: 'Playfair Display', sans;
+    }
+
+    @keyframes fadeInText {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="background"></div>
+
+  <!-- Floating Items -->
+  <a href="#link1">
+    <img id="item1" class="floating" src="https://i.imgur.com/lM6gDGa.png" alt="Emotion1">
+  </a>
+  <a href="#link2">
+    <img id="item2" class="floating" src="https://i.imgur.com/Tm5tuSl.png" alt="Emotion2">
+  </a>
+  <a href="#link3">
+    <img id="item3" class="floating" src="https://i.imgur.com/IzMmIB2.png" alt="Emotion3">
+  </a>
+  <a href="#link4">
+    <img id="item4" class="floating" src="https://i.imgur.com/uq2piAy.png" alt="Emotion4">
+  </a>
+
+  <!-- Main Text and Sleep Tips -->
+  <div class="text">DREAMY</div>
+  <div class="tip" id="sleepTip"></div>
+
+  <!-- Background Music -->
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="Soul_and_Mind_-_E_s_Jammy_Jams.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // 수면 팁 배열
+    const sleepTips = [
+      "[ tip. 매일 일정한 시간에 잠들고 일어나세요. ]",
+      "[ tip. 소음을 없애고 온도와 조명을 쾌적하게 하세요. ]",
+      "[ tip. 낮잠은 15분 이내로 제한하세요. ]",
+      "[ tip. 잠들기 직전 운동은 피하세요. ]",
+      "[ tip. 카페인 섭취, 니코틴과 알코올을 피하세요. ]",
+      "[ tip. 잠들기 전, 식사를 피하고 충분한 수분을 섭취하세요. ]",
+      "[ tip. 수면제를 의존적으로 사용하지 마세요. ]",
+      "[ tip. 잠들기 전, 따뜻한 차 한 잔으로 몸을 이완해 보세요. ]",
+      "[ tip. 자기 전에 스마트폰과 같은 전자 기기 사용을 줄이세요. ]"
+    ];
+
+    // 수면 팁 랜덤 표시 함수
+    function showRandomTip() {
+      const tipElement = document.getElementById("sleepTip");
+      const randomIndex = Math.floor(Math.random() * sleepTips.length);
+      tipElement.textContent = sleepTips[randomIndex];
+    }
+
+    // 초기 팁 표시 및 10초마다 업데이트
+    showRandomTip();
+    setInterval(showRandomTip, 10000);
+    
+    // 음악 재생 (화면 아무대나 클릭)
+    document.body.onclick = function() {
+      var music = document.getElementById("backgroundMusic");
+      music.play();
+    }
+    
+  </script>
+</body>
+</html>
